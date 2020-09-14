@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
+
 @Slf4j
 @Controller
 public class UsersController {
@@ -27,7 +29,7 @@ public class UsersController {
 	}
 
 	@PostMapping("/registration")
-	public String register(@ModelAttribute User user, Model model) throws AssignmentException {
+	public String register(@ModelAttribute @Valid User user, Model model) throws AssignmentException {
 		System.out.println(user);
 		User savedUser;
 		if (user.getId() == null) {
