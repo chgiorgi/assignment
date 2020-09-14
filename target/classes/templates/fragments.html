@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="sectorOptions(sectors,depth)" th:remove="tag">
+    <div th:each="sector:${sectors}" th:remove="tag">
+<!--          <span >-->
+<!--             -->
+<!--              <input type="checkbox" name="sectors"-->
+<!--                     th:text="${sector.name}"-->
+<!--                     th:value="${sector.id}"-->
+<!--                     th:field="*{sectors}"-->
+<!--              />-->
+<!--          </span>-->
+
+                <option th:value="${sector.id}" th:id="${sector.id}">
+                   <span th:if="${depth>0}"
+                         th:each="i : ${#numbers.sequence(0, depth)}"
+                         th:text="'&nbsp;&nbsp;&nbsp;&nbsp;'"></span>
+                    <span th:text="${sector.name}"></span>
+                </option>
+        <div th:if="${sector.children.size > 0}" th:replace=":: sectorOptions (${sector.children},${depth+1})" th:remove="tag">
+        </div>
+    </div>
+</div>
+</html>
