@@ -3,6 +3,7 @@ package com.helmes.assignment.api.controller;
 
 import com.helmes.assignment.api.model.EmptyUserResponse;
 import com.helmes.assignment.api.model.User;
+import com.helmes.assignment.server.exception.AssignmentException;
 import com.helmes.assignment.server.services.SectorsService;
 import com.helmes.assignment.server.services.UsersService;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +27,7 @@ public class UsersController {
 	}
 
 	@PostMapping("/registration")
-	public String register(@ModelAttribute User user, Model model) {
+	public String register(@ModelAttribute User user, Model model) throws AssignmentException {
 		System.out.println(user);
 		User savedUser;
 		if (user.getId() == null) {
@@ -41,7 +42,7 @@ public class UsersController {
 
 
 	@GetMapping("/user")
-	public String loadUser(User user, Model model) {
+	public String loadUser(User user, Model model) throws AssignmentException {
 		User loadedUser = usersService.getUser(user.getName());
 		if (loadedUser != null) {
 			model.addAttribute("selectedSectorIds", loadedUser.getSectors());
