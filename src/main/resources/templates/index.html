@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div class="container my-5">
+    <h2 class="mb-5">Update User</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <div>
+
+                <tr th:each="sector:${sectors}">
+                    <td th:text="${sector.name}"></td>
+                    <br>
+                </tr>
+
+            </div>
+
+
+            <label for="cars">Choose a car:</label>
+            <select name="cars" id="cars">
+                <div th:each="sector:${sectors}">
+                        <option th:text="${sector.name}">Volvo</option>
+                </div>
+
+            </select>
+
+            <br>
+            <br>
+            <div th:fragment="formField (sector)">
+
+                <div th:if="sector.children">
+                    <label th:for="${#strings.toLowerCase(field)}"> <span
+                            th:text="${field}">Field</span>
+                    </label>
+                </div>
+                <div>
+                    <input type="text" th:id="${#strings.toLowerCase(field)}"
+                           th:name="${#strings.toLowerCase(field)}" th:value="${value}"
+                           th:size="${size}">
+                </div>
+            </div>
+            <input type="submit" value="Submit">
+
+            <div>
+                <div class="col-md-6 mt-5">
+                    <input type="submit" class="btn btn-primary" value="Update User">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

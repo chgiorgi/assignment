@@ -1,0 +1,20 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit user hobbies</title>
+</head>
+<body>
+<h1>Edit user hobbies</h1>
+<form th:object="${sectors}" action="index.html" th:action="@{/save}" method="post">
+    <input type="hidden" th:field="*{id}" />
+    User hobbies (checkboxes):
+    <div th:each="sector : ${sectors}">
+        <input type="checkbox" th:id="${{sector.name}}" th:value="${sector.name}" th:field="*{hobbies}" />
+        <label th:for="${   ector.name}" th:text="${sector.name}">Cinema</label>
+    </div>
+    <br />
+    <input type="submit" />
+</form>
+</body>
+</html>
