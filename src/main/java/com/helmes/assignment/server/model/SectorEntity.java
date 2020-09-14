@@ -42,4 +42,7 @@ public class SectorEntity {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<SectorEntity> children;
 
+	public SectorEntity(Long id) {
+		this.id = id;
+	}
 }

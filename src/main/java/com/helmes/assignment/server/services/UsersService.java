@@ -1,14 +1,14 @@
 package com.helmes.assignment.server.services;
 
 import com.helmes.assignment.api.model.User;
-
-import java.util.List;
+import com.helmes.assignment.server.exception.AssignmentException;
 
 public interface UsersService {
 
-	public List<User> getAllUsers();
+	public User getUser(String name) throws AssignmentException;
 
-	public User updateUser(User user);
+	public User createUser(User user) throws AssignmentException;
 
-	public User createUser(User user);
+	User updateUser(User user) throws AssignmentException;
+
 }

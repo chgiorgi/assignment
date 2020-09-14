@@ -11,12 +11,6 @@ public class SectorDtoHelper {
 
 	public static Sector toDTO(SectorEntity entity) {
 
-//		Sector sector = new Sector();
-//
-//		sector.setId(entity.getId());
-//		sector.setName(entity.getName());
-//		sector.setChildren(entity.getChildren().stream().map(SectorDtoHelper::toDTO).collect(Collectors.toList()));
-
 		return Sector.builder()
 				.id(entity.getId())
 				.name(entity.getName())
@@ -37,6 +31,13 @@ public class SectorDtoHelper {
 			return new ArrayList<>();
 		}
 		return sectorEntityes.stream().map(SectorDtoHelper::toDTO).collect(Collectors.toList());
+	}
+
+	public static List<SectorEntity> fromDTOs(List<Sector> sectors) {
+		if (sectors == null) {
+			return new ArrayList<>();
+		}
+		return sectors.stream().map(SectorDtoHelper::fromDTO).collect(Collectors.toList());
 	}
 
 }

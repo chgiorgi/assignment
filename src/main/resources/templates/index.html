@@ -3,53 +3,71 @@
 <head>
     <title>Getting Started: Serving Web Content</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script type="text/javascript" th:src="@{/js/multiselect.js}"></script>
+    <link rel="stylesheet"  th:href="@{/css/multiselect.css}">
+
+    <script th:inline="javascript">
+        var sectorIds = [[${selectedSectorIds}]];
+        $(document).ready(function () {
+            $("#cars").CreateMultiCheckBox({width: '450px', defaultText: 'Select Below', height: '300px'});
+            $(document).selectOptions(sectorIds);
+            // for (var option in sectorIds) {
+            //     debugger;
+            //     $("input.mulinput[value='" + option + "']").click();
+            // }
+        });
+
+    </script>
 </head>
 <body>
 <div class="container my-5">
     <h2 class="mb-5">Update User</h2>
     <div class="row">
-        <div class="col-md-6">
-            <div>
+        <form th:action="@{/registration}" th:object="${user}" method="post">
 
-                <tr th:each="sector:${sectors}">
-                    <td th:text="${sector.name}"></td>
-                    <br>
-                </tr>
+            <div class="col-md-6">
+                <input id="id" type="hidden" th:field="*{id}">
+                <br>
+                <label for="userName">Name:</label>
+                <input id="userName" type="text" th:field="*{name}">
+                <br>
+                <label for="cars">Choose a car:</label>
+                <select name="cars" id="cars" th:field="*{sectors}" multiple="multiple">
+                    <div th:replace="fragments :: sectorOptions (${sectors},${0})" th:remove="tag">
+                    </div>
+                </select>
+                <br>
+                <label for="agreetoterms">Terms:</label>
+                <input type="checkbox" id="agreetoterms" th:field="*{agreeToTerms}">
+                <br>
 
-            </div>
+                <input type="submit" value="Submit">
 
-
-            <label for="cars">Choose a car:</label>
-            <select name="cars" id="cars">
-                <div th:each="sector:${sectors}">
-                        <option th:text="${sector.name}">Volvo</option>
-                </div>
-
-            </select>
-
-            <br>
-            <br>
-            <div th:fragment="formField (sector)">
-
-                <div th:if="sector.children">
-                    <label th:for="${#strings.toLowerCase(field)}"> <span
-                            th:text="${field}">Field</span>
-                    </label>
-                </div>
                 <div>
-                    <input type="text" th:id="${#strings.toLowerCase(field)}"
-                           th:name="${#strings.toLowerCase(field)}" th:value="${value}"
-                           th:size="${size}">
+                    <div class="col-md-6 mt-5">
+                        <input type="submit" class="btn btn-primary" value="Update User">
+                    </div>
                 </div>
             </div>
-            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <div class="row">
+        <form th:action="@{/user}" th:object="${loadUser}" method="get">
 
-            <div>
-                <div class="col-md-6 mt-5">
-                    <input type="submit" class="btn btn-primary" value="Update User">
-                </div>
+            <div class="col-md-6">
+
+                <label for="userName">Name:</label>
+                <input id="loadUser" type="text" th:field="*{name}">
+                <br>
+               <button type="submit">Load</button>
+
             </div>
-        </div>
+        </form>
+        <form th:action="@{/}">
+            <button type="submit">Reset</button>
+
+        </form>
     </div>
 </div>
 </body>

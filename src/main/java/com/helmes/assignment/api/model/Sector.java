@@ -1,10 +1,7 @@
 package com.helmes.assignment.api.model;
 
-import com.helmes.assignment.server.model.SectorEntity;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
 @Builder
